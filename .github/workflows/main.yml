@@ -10,6 +10,10 @@ permissions:
   pages: write
   id-token: write
 
+defaults:
+  run:
+    working-directory: strajk-bowling
+
 jobs:
   test:
     runs-on: ubuntu-latest
