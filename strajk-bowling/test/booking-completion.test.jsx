@@ -19,7 +19,6 @@ test('User completes booking and receives a booking number', () => {
 });
 
 */
-
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Booking from '../src/views/Booking';
@@ -83,5 +82,33 @@ describe('Booking Component', () => {
     expect(
       screen.getByText('Det får max vara 4 spelare per bana')
     ).toBeInTheDocument();
+  });
+
+  test('handles successful booking submission', async () => {
+    renderWithRouter(<Booking />);
+
+    // Fyll i alla fält korrekt
+    fireEvent.change(screen.getByLabelText(/Datum/i), {
+      target: { value: '2025-01-01' },
+    });
+    fireEvent.change(screen.getByLabelText(/Tid/i), {
+      target: { value: '14:00' },
+    });
+    fireEvent.change(screen.getByLabelText(/Antal spelare/i), {
+      target: { value: '4' },
+    });
+    fireEvent.change(screen.getByLabelText(/Banor/i), {
+      target: { value: '1' },
+    });
+
+    // Klicka på bokningsknappen
+    const bookButton = screen.getByText('strIIIIIike!');
+    fireEvent.click(bookButton);
+
+    // Mocka skickad bokning (eller låt komponentens logik hantera detta)
+    const confirmation = await screen.findByText(/Bokningen har skickats/i);
+
+    // Kontrollera att bokningsnummer visas
+    expect(confirmation).toBeInTheDocument();
   });
 });
