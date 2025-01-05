@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/Strajk',
   test: {
+    globals: true,
     environment: 'jsdom',
   },
 });
