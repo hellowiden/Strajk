@@ -22,7 +22,7 @@ test('User completes booking and receives a booking number', () => {
 
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import Booking from '../Booking';
+import Booking from '../src/views/Booking';
 
 function renderWithRouter(component) {
   return render(<BrowserRouter>{component}</BrowserRouter>);
