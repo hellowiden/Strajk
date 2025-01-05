@@ -1,7 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Booking from '../src/views/Booking';
-import { vi } from 'vitest';
 
 test('Testa en användare med en bana och en sko', () => {
   render(
@@ -16,12 +15,12 @@ test('Testa en användare med en bana och en sko', () => {
   fireEvent.click(addShoeButton);
 
   // Spelare 1
-  const shoeInput1 = screen.getByLabelText('Shoe size / person 1');
+  const shoeInput1 = screen.getByTestId('Shoe size / person 1');
   fireEvent.change(shoeInput1, { target: { value: '10' } });
   expect(shoeInput1.value).toBe('10');
 
   // Spelare 2
-  const shoeInput2 = screen.getByLabelText('Shoe size / person 2');
+  const shoeInput2 = screen.getByTestId('Shoe size / person 2');
   fireEvent.change(shoeInput2, { target: { value: '15' } });
   expect(shoeInput2.value).toBe('15');
 
@@ -55,8 +54,8 @@ test('Ta bort ett för mycket fält för skostorlek', () => {
   // Ta bort en sko
   const removeShoeButtons = screen.getAllByTestId('removeShoeButton');
   fireEvent.click(removeShoeButtons[1]);
-  expect(screen.queryByLabelText('Shoe size / person 1')).not.toBeNull();
-  expect(screen.queryByLabelText('Shoe size / person 2')).not.toBeNull();
-  expect(screen.queryByLabelText('Shoe size / person 3')).not.toBeNull();
-  expect(screen.queryByLabelText('Shoe size / person 4')).toBeNull();
+  expect(screen.queryByTestId('Shoe size / person 1')).not.toBeNull();
+  expect(screen.queryByTestId('Shoe size / person 2')).not.toBeNull();
+  expect(screen.queryByTestId('Shoe size / person 3')).not.toBeNull();
+  expect(screen.queryByTestId('Shoe size / person 4')).toBeNull();
 });

@@ -14,14 +14,12 @@ function Input({
 
   return (
     <section className="input">
-      <label className="input__label" htmlFor={id}>
-        {label}
-      </label>
+      <label className="input__label">{label}</label>
       <input
         type={type}
         className={`input__field ${customClass ? customClass : ''}`}
-        id={id}
         name={name}
+        data-testid={label}
         onChange={handleChange}
         defaultValue={defaultValue ? defaultValue : ''}
         maxLength={maxLength}
