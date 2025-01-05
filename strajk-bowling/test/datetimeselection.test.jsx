@@ -4,7 +4,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import BookingInfo from '../src/components/BookingInfo/BookingInfo';
 
 test('Användaren ska kunna välja ett datum och en tid från ett kalender- och tidvalssystem', () => {
-  render(<BookingInfo updateBookingDetails={jest.fn()} />);
+  render(<BookingInfo updateBookingDetails={vi.fn()} />);
 
   // Datumval
   const dateInput = screen.getByLabelText(/Date/i);
