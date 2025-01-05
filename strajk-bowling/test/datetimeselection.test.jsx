@@ -1,17 +1,18 @@
 // Användaren ska kunna välja ett datum och en tid från ett kalender- och tidvalssystem.
 
-import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import Booking from '../src/views/Booking';
+import { render, screen, fireEvent } from '@testing-library/react';
+import BookingInfo from '../src/components/BookingInfo/BookingInfo';
 
-function renderWithRouter(component) {
-  return render(<BrowserRouter>{component}</BrowserRouter>);
-}
+test('User selects a date and time', () => {
+  render(<BookingInfo />);
 
-test('renders Booking component', () => {
-  renderWithRouter(<Booking />);
+  fireEvent.change(screen.getByLabelText(/Select Date/i), {
+    target: { value: '2024-12-15' },
+  });
+  fireEvent.change(screen.getByLabelText(/Select Time/i), {
+    target: { value: '18:00' },
+  });
 
-  // Kontrollera om titeln "Booking" renderas
-  const headingElement = screen.getByText(/Booking/i);
-  expect(headingElement).toBeInTheDocument();
+  expect(screen.getByDisplayValue('2024-12-15')).toBeInTheDocument();
+  expect(screen.getByDisplayValue('18:00')).toBeInTheDocument();
 });
