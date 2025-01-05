@@ -1,7 +1,7 @@
-import "./Shoes.scss";
-import { nanoid } from "nanoid";
+import './Shoes.scss';
+import { nanoid } from 'nanoid';
 
-import Input from "../Input/Input";
+import Input from '../Input/Input';
 
 function Shoes({ updateSize, addShoe, removeShoe, shoes }) {
   const shoeComps = shoes.map((input, index) => {
@@ -18,6 +18,7 @@ function Shoes({ updateSize, addShoe, removeShoe, shoes }) {
         />
         <button
           className="shoes__button shoes__button--small"
+          data-testid="removeShoeButton" // TEST
           onClick={() => {
             removeShoe(input.id);
           }}
@@ -38,6 +39,7 @@ function Shoes({ updateSize, addShoe, removeShoe, shoes }) {
       {shoeComps}
       <button
         className="shoes__button"
+        data-testid="addShoeButton" // TEST
         onClick={() => {
           addShoe(nanoid());
         }}

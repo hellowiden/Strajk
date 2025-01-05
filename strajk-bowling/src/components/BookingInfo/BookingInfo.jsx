@@ -1,6 +1,6 @@
-import "./BookingInfo.scss";
+import './BookingInfo.scss';
 
-import Input from "../Input/Input";
+import Input from '../Input/Input';
 
 function BookingInfo({ updateBookingDetails }) {
   return (
@@ -13,6 +13,7 @@ function BookingInfo({ updateBookingDetails }) {
           <Input
             label="Date"
             type="date"
+            dataTestid="dateInput" // TEST
             customClass="booking-info__date"
             name="when"
             handleChange={updateBookingDetails}

@@ -1,4 +1,4 @@
-import "./Input.scss";
+import './Input.scss';
 
 function Input({
   label,
@@ -10,15 +10,20 @@ function Input({
   disabled,
   maxLength,
 }) {
+  const id = `input-${name}`;
+
   return (
     <section className="input">
-      <label className="input__label">{label}</label>
+      <label className="input__label" htmlFor={id}>
+        {label}
+      </label>
       <input
         type={type}
-        className={`input__field ${customClass ? customClass : ""}`}
+        className={`input__field ${customClass ? customClass : ''}`}
+        id={id}
         name={name}
         onChange={handleChange}
-        defaultValue={defaultValue ? defaultValue : ""}
+        defaultValue={defaultValue ? defaultValue : ''}
         maxLength={maxLength}
         disabled={disabled}
       />

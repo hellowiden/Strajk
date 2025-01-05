@@ -1,18 +1,35 @@
-// Användaren ska kunna välja ett datum och en tid från ett kalender- och tidvalssystem.
-
 import { render, screen, fireEvent } from '@testing-library/react';
-import BookingInfo from '../src/components/BookingInfo/BookingInfo';
+import { MemoryRouter } from 'react-router-dom';
+import Booking from '../src/views/Booking';
 
-test('Användaren ska kunna välja ett datum och en tid från ett kalender- och tidvalssystem', () => {
-  render(<BookingInfo updateBookingDetails={vi.fn()} />);
+test('Testa en användare med en bana och en sko', () => {
+  render(
+    <MemoryRouter>
+      <Booking />
+    </MemoryRouter>
+  );
 
   // Datumval
-  const dateInput = screen.getByLabelText(/Date/i);
+  const dateInput = screen.getByLabelText('Date');
   fireEvent.change(dateInput, { target: { value: '2024-12-15' } });
-  expect(screen.getByDisplayValue('2024-12-15')).toBeInTheDocument();
+  expect(dateInput.value).toBe('2024-12-15');
 
   // Tidval
-  const timeInput = screen.getByLabelText(/Time/i);
+  const timeInput = screen.getByLabelText('Time');
   fireEvent.change(timeInput, { target: { value: '18:00' } });
-  expect(screen.getByDisplayValue('18:00')).toBeInTheDocument();
+  expect(timeInput.value).toBe('18:00');
+
+  // Användaren ska kunna ange antal spelare (minst 1 spelare).
+  const peopleInput = screen.getByLabelText('Number of awesome bowlers');
+  fireEvent.change(peopleInput, { target: { value: '2' } });
+  expect(peopleInput.value).toBe('2');
+
+  // Användaren ska kunna ange antal bana (minst 1 bana).
+  const lanesInput = screen.getByLabelText('Number of lanes');
+  fireEvent.change(lanesInput, { target: { value: '2' } });
+  expect(lanesInput.value).toBe('2');
+
+  // complete booking
+  const submitButton = screen.getByTestId('submit-btn');
+  fireEvent.click(submitButton);
 });
